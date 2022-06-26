@@ -36,9 +36,17 @@ public class MainController {
 				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Messages.getMessage400());
 			}
 			MarketItem marketItem = new MarketItem(item, repo, updateDate);
+			recurseUpdateDate(marketItem);
 			repo.save(marketItem);
 		}
 		return ResponseEntity.status(HttpStatus.OK).body("Вставка или обновление прошли успешно.");
+	}
+	
+	public void recurseUpdateDate(MarketItem marketItem) {
+		while (marketItem.getParent() != null) {
+			marketItem.getParent().setUpdateDate(marketItem.getUpdateDate());
+			marketItem = marketItem.getParent();
+		}
 	}
 
 	@GetMapping(path = "/nodes/{id}")

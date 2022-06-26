@@ -79,7 +79,7 @@ public class MarketItem {
 	public void setType(String type) {
 		this.type = type;
 	}
-
+	@JsonProperty("date")
 	public String getUpdateDate() {
 		return updateDate;
 	}
