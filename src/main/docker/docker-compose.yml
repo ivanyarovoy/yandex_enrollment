@@ -27,3 +27,7 @@ services:
       - POSTGRES_USER=username
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=default_database
+    volumes:
+          - db_data:/home/ubuntu/postgres
+volumes:
+    db_data: {}
